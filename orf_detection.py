@@ -1,16 +1,35 @@
-# Function to read a FASTA file and extract the nucleotide sequence
-def read_fasta(file_path):
+# Function to read a multi-sequence FASTA file and store each sequence with its header
+def read_multi_fasta(file_path):
     """
-    Function to read a FASTA file and return the nucleotide sequence as a string.
+    Function to read a FASTA file with multiple sequences and return a dictionary with
+    headers as keys and sequences as values.
     :param file_path: Path to the FASTA file
-    :return: The nucleotide sequence as a string
+    :return: A dictionary with headers as keys and nucleotide sequences as values
     """
-    sequence = ''
+    sequences = {}
+    current_header = None
+    current_sequence = []
+    
     with open(file_path, 'r') as file:
         for line in file:
-            if not line.startswith('>'):
-                sequence += line.strip()
-    return sequence
+            line = line.strip()
+            if line.startswith('>'):
+                # Save the previous sequence if there is one
+                if current_header:
+                    sequences[current_header] = ''.join(current_sequence)
+                
+                # Start a new sequence
+                current_header = line[1:]  # Exclude the ">" character
+                current_sequence = []
+            else:
+                # Add line to the current sequence
+                current_sequence.append(line)
+        
+        # Save the last sequence after loop ends
+        if current_header:
+            sequences[current_header] = ''.join(current_sequence)
+    
+    return sequences
 
 # Function to find open reading frames (ORFs) in a nucleotide sequence
 def find_orfs(fasta_sequence, min_length=100):
@@ -37,19 +56,25 @@ def find_orfs(fasta_sequence, min_length=100):
     
     return orfs
 
-# Example usage of the script:
+# Main part of the script to process multi-species FASTA
 if __name__ == "__main__":
     # Specify the path to your FASTA file
     fasta_file_path = 'Project_1_matK_Taraxacum.fasta'
     
-    # Read the sequence from the FASTA file
-    sequence = read_fasta(fasta_file_path)
+    # Read all sequences from the multi-sequence FASTA file
+    sequences = read_multi_fasta(fasta_file_path)
     
-    # Find ORFs in the sequence (minimum length of 100 nucleotides)
-    orfs = find_orfs(sequence, min_length=100)
-    
-    # Display the identified ORFs (start and end positions)
-    print("Open Reading Frames (ORFs) found:")
-    for start, end in orfs:
-        print(f"ORF starts at {start}, ends at {end}")
-
+    # Loop through each species' sequence and find ORFs
+    for species_name, sequence in sequences.items():
+        # Find ORFs in the sequence (minimum length of 100 nucleotides)
+        orfs = find_orfs(sequence, min_length=100)
+        
+        # Display the species name and the identified ORFs
+        print(f"Species: {species_name}")
+        if orfs:
+            print("Open Reading Frames (ORFs) found:")
+            for start, end in orfs:
+                print(f"  ORF starts at {start}, ends at {end}")
+        else:
+            print("  No ORFs found")
+        print("-" * 50)
