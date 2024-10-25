@@ -20,6 +20,9 @@ The team members are:
 
 ## Prior to running scripts
 To run any of the scripts, you must install biopython from the terminal, using the command:
-"pip install biopython."
+
+"pip install biopython"
+
 To tun the plot_genes.py script need to install: biopython, matplotlib, seaborn, pandas, and squarify using the commands:
+
 "pip install biopython matplotlib seaborn pandas squarify".
