@@ -1,5 +1,3 @@
-pip install biopython matplotlib seaborn pandas squarify
-
 import os
 import matplotlib.pyplot as plt
 from Bio import SeqIO
