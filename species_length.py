@@ -1,7 +1,7 @@
 # If Biopython is not installed, install with "pip install biopython"
 
 # Import fasta file
-fasta_file = "Project_1_matK_Taraxacum.fasta.txt"
+fasta_file = "Project_1_matK_Taraxacum.fasta"
 
 # Import Biopython
 from Bio import SeqIO
