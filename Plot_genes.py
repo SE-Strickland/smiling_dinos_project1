@@ -1,3 +1,6 @@
+# If Biopython is not installed, install with "pip install biopython". Also, you will need to plot the following matplotlib, seaborn, pandas, and squarify"
+# "pip install biopython matplotlib seaborn pandas squarify".
+
 import os
 import matplotlib.pyplot as plt
 from Bio import SeqIO
