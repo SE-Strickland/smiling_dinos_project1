@@ -1,4 +1,4 @@
-# smiling_dinos_project1
+# Smiling Dinos Project 1
 
 Project 1 for BSC6451 Computational Tools Class - Fall 2024
 
@@ -19,5 +19,7 @@ The team members are:
 - Sarah Ellen Strickland
 
 ## Prior to running scripts
-To run any of the scripts, you must install biopython from the terminal, using the command "pip install biopython."
-To tun the plot_genes.py script need to install: biopython, matplotlib, seaborn, pandas, and squarify using the commands "pip install biopython matplotlib seaborn pandas squarify".
+To run any of the scripts, you must install biopython from the terminal, using the command:
+"pip install biopython."
+To tun the plot_genes.py script need to install: biopython, matplotlib, seaborn, pandas, and squarify using the commands:
+"pip install biopython matplotlib seaborn pandas squarify".
